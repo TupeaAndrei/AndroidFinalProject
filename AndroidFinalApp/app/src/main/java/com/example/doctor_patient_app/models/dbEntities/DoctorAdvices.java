@@ -14,4 +14,34 @@ public class DoctorAdvices {
 
     @ColumnInfo(name = "patient_id")
     private Integer patientId;
+
+    public DoctorAdvices(Integer id, String adviceText, Integer patientId) {
+        this.id = id;
+        this.adviceText = adviceText;
+        this.patientId = patientId;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getAdviceText() {
+        return adviceText;
+    }
+
+    public void setAdviceText(String adviceText) {
+        this.adviceText = adviceText;
+    }
+
+    public Integer getPatientId() {
+        return patientId;
+    }
+
+    public void setPatientId(Integer patientId) {
+        this.patientId = patientId;
+    }
 }

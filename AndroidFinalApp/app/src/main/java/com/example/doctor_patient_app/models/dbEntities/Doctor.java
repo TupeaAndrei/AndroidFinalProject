@@ -24,4 +24,54 @@ public class Doctor {
     @ColumnInfo(name="specialization")
     @Nullable
     private String specialization;
+
+    public Doctor(Integer id, String name, String email, @Nullable Integer age, @Nullable String specialization) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.age = age;
+        this.specialization = specialization;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Nullable
+    public Integer getAge() {
+        return age;
+    }
+
+    public void setAge(@Nullable Integer age) {
+        this.age = age;
+    }
+
+    @Nullable
+    public String getSpecialization() {
+        return specialization;
+    }
+
+    public void setSpecialization(@Nullable String specialization) {
+        this.specialization = specialization;
+    }
 }
