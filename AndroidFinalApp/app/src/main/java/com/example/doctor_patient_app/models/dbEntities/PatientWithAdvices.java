@@ -12,6 +12,6 @@ public class PatientWithAdvices {
             parentColumn = "id",
             entityColumn = "patient_id"
     )
-    
+
     public List<DoctorAdvices> advices;
 }

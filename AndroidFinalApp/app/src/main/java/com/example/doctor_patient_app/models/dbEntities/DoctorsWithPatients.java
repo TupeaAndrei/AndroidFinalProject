@@ -6,7 +6,7 @@ import androidx.room.Relation;
 import java.util.List;
 
 public class DoctorsWithPatients {
-    @Embedded public Doctor doctor;
+    @Embedded private Doctor doctor;
     @Relation(
             parentColumn = "id",
             entityColumn = "doctor_id"
