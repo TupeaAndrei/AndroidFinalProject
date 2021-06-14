@@ -6,10 +6,10 @@ import androidx.room.Relation;
 import java.util.List;
 
 public class DoctorsWithPatients {
-    @Embedded private Doctor doctor;
+    @Embedded public Doctor doctor;
     @Relation(
             parentColumn = "id",
             entityColumn = "doctor_id"
     )
-    private List<Patient> patients;
+    public List<Patient> patients;
 }
