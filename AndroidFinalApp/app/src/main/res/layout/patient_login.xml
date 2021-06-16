@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+
+    <ImageView
+        android:id="@+id/login_fragment_image_patient"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/patient_logo"
+        android:maxWidth="180dp"
+        android:maxHeight="180dp"
+        android:adjustViewBounds="true"
+        />
+
+    <EditText
+        android:id="@+id/email_patient_login_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/login_fragment_image_patient"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"
+        android:hint="@string/email_hint"
+        android:inputType="textEmailAddress"
+        android:maxLength="50"
+        android:background="@color/red"
+        />
+
+    <EditText
+        android:id="@+id/password_login_patient_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/email_patient_login_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="50dp"
+        android:background="@color/red"
+        android:hint="@string/hint_password"
+        android:maxLength="50"
+        android:inputType="textPassword"
+        />
+
+    <Button
+        android:id="@+id/login_patient_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/password_login_patient_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:text="@string/login"
+        android:backgroundTint="@color/dark_red"
+        android:textStyle="italic|bold"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
