@@ -8,10 +8,12 @@ import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
 import androidx.room.util.TableInfo;
 
+import com.example.doctor_patient_app.models.PatientElement;
+
 @Entity
 public class Patient {
-    @PrimaryKey
-    private int id;
+    @PrimaryKey(autoGenerate = true)
+    private Integer id;
 
     @ColumnInfo(name ="name")
     private String name;
@@ -38,8 +40,7 @@ public class Patient {
     @ColumnInfo(name="doctor_id")
     private Integer doctorId;
 
-    public Patient(int id, String name, String email, @Nullable String diagnostic, @Nullable Integer age, @Nullable Integer height, @Nullable Integer weight, Integer doctorId) {
-        this.id = id;
+    public Patient(String name, String email, @Nullable String diagnostic, @Nullable Integer age, @Nullable Integer height, @Nullable Integer weight, Integer doctorId) {
         this.name = name;
         this.email = email;
         this.diagnostic = diagnostic;
@@ -115,5 +116,9 @@ public class Patient {
 
     public void setDoctorId(Integer doctorId) {
         this.doctorId = doctorId;
+    }
+
+    public PatientElement convert(){
+        return new PatientElement(name,email,diagnostic,height,age,weight,doctorId);
     }
 }

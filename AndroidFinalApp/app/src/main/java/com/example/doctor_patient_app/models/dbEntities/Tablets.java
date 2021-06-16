@@ -4,9 +4,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.doctor_patient_app.models.TabletsElement;
+
 @Entity
 public class Tablets {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private Integer id;
 
     @ColumnInfo(name = "name")
@@ -21,8 +23,7 @@ public class Tablets {
     @ColumnInfo(name="patient_id")
     private Integer patientId;
 
-    public Tablets(Integer id, String name, String indications, String description, Integer patientId) {
-        this.id = id;
+    public Tablets(String name, String indications, String description, Integer patientId) {
         this.name = name;
         this.indications = indications;
         this.description = description;
@@ -67,5 +68,9 @@ public class Tablets {
 
     public void setPatientId(Integer patientId) {
         this.patientId = patientId;
+    }
+
+    public TabletsElement convert(){
+        return new TabletsElement(name,indications,description,patientId);
     }
 }

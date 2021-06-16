@@ -5,9 +5,11 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.example.doctor_patient_app.models.DoctorElement;
+
 @Entity
 public class Doctor {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
     private Integer id;
 
@@ -25,8 +27,7 @@ public class Doctor {
     @Nullable
     private String specialization;
 
-    public Doctor(Integer id, String name, String email, @Nullable Integer age, @Nullable String specialization) {
-        this.id = id;
+    public Doctor(String name, String email, @Nullable Integer age, @Nullable String specialization) {
         this.name = name;
         this.email = email;
         this.age = age;
@@ -73,5 +74,9 @@ public class Doctor {
 
     public void setSpecialization(@Nullable String specialization) {
         this.specialization = specialization;
+    }
+
+    public DoctorElement convert(){
+        return new DoctorElement(name,email,age,specialization);
     }
 }
