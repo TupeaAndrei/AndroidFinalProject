@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Doctor-Patient-App</string>
+    <string name="doctor_registration">Doctor Registration</string>
+    <string name="email_hint">Enter email...</string>
+    <string name="hint_password">Enter password..</string>
+    <string name="enter_name">Enter name..</string>
+    <string name="register_button_text">Register</string>
 </resources>
