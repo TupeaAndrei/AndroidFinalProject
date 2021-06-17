@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="title_dimen">20sp</dimen>
+    <dimen name="name_default_size">20sp</dimen>
+    <dimen name="default_email_dimension">18sp</dimen>
+    <dimen name="small_padding_dimen">10dp</dimen>
+    <dimen name="medium_padding">20dp</dimen>
+    <dimen name="default_window_padding">15dp</dimen>
 </resources>
