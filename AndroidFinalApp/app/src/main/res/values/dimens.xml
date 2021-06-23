@@ -6,4 +6,5 @@
     <dimen name="small_padding_dimen">10dp</dimen>
     <dimen name="medium_padding">20dp</dimen>
     <dimen name="default_window_padding">15dp</dimen>
+    <dimen name="welcome_title_dimen">24sp</dimen>
 </resources>
