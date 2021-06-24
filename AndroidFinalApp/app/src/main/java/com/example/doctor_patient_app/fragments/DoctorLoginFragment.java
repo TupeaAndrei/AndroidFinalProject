@@ -86,14 +86,14 @@ public class DoctorLoginFragment extends Fragment {
         }
         String email = emailText.getText().toString();
         String password = passwordText.getText().toString();
-        if (Validators.isValidEmail(email)){
+        if (!Validators.isValidEmail(email)){
             emailText.setError("Invalid email!");
             return;
         }
         else{
             emailText.setError(null);
         }
-        if (Validators.isValidPassword(password)){
+        if (!Validators.isValidPassword(password)){
             passwordText.setError("Invalid password!");
             return;
         }else{
