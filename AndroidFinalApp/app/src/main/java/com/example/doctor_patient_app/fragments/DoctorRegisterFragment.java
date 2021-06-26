@@ -16,11 +16,16 @@ import androidx.fragment.app.Fragment;
 import com.example.doctor_patient_app.R;
 import com.example.doctor_patient_app.helpers.Validators;
 import com.example.doctor_patient_app.interfaces.IActivityFragmentCommunication;
+import com.example.doctor_patient_app.models.dbEntities.Doctor;
+import com.example.doctor_patient_app.repository.HealthCareRepository;
+import com.example.doctor_patient_app.repository.HealthCareRepositoryListener;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.List;
 
 public class DoctorRegisterFragment extends Fragment {
     private View view;
@@ -32,6 +37,8 @@ public class DoctorRegisterFragment extends Fragment {
     private Button registerButton;
 
     private FirebaseAuth mAuth;
+
+    private HealthCareRepository healthCareRepository = new HealthCareRepository();
 
     private IActivityFragmentCommunication iActivityFragmentCommunication;
 
@@ -63,6 +70,13 @@ public class DoctorRegisterFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.doctor_register,container,false);
+        //this function is called so that the database inspector can initialize (for debug use only)
+        healthCareRepository.getAllDoctors(new HealthCareRepositoryListener() {
+            @Override
+            public void onSuccess() {
+
+            }
+        });
         return view;
     }
 
@@ -109,11 +123,11 @@ public class DoctorRegisterFragment extends Fragment {
             passwordText.setError(null);
         }
 
-        createFirebaseUser(email,password);
+        createFirebaseUser(email,password,username);
 
     }
 
-    private void createFirebaseUser(String email,String password){
+    private void createFirebaseUser(String email,String password,String username){
         if (getActivity() == null){
             return;
         }
@@ -123,6 +137,13 @@ public class DoctorRegisterFragment extends Fragment {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()){
                             FirebaseUser user = mAuth.getCurrentUser();
+                            Doctor doctor = new Doctor(username,email,0,null);
+                            healthCareRepository.insertDoctor(doctor, new HealthCareRepositoryListener() {
+                                @Override
+                                public void onSuccess() {
+                                    Toast.makeText(getActivity(),"Doctor insert succesfull!",Toast.LENGTH_SHORT).show();
+                                }
+                            });
                             Toast.makeText(getContext(),"Authentification succesfull!",Toast.LENGTH_SHORT).show();
                         }else{
                             Toast.makeText(getContext(),"Authentification failed!",Toast.LENGTH_SHORT).show();
