@@ -10,14 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doctor_patient_app.R;
 import com.example.doctor_patient_app.models.DoctorAdviceElement;
+import com.example.doctor_patient_app.models.dbEntities.DoctorAdvices;
 
 import java.util.ArrayList;
 
 public class DoctorAdviceAdapter extends RecyclerView.Adapter<DoctorAdviceAdapter.DoctorAdviceViewHolder> {
 
-    private final ArrayList<DoctorAdviceElement> doctorAdviceList;
+    private final ArrayList<DoctorAdvices> doctorAdviceList;
 
-    public DoctorAdviceAdapter(ArrayList<DoctorAdviceElement> doctorAdviceList) {
+    public DoctorAdviceAdapter(ArrayList<DoctorAdvices> doctorAdviceList) {
         this.doctorAdviceList = doctorAdviceList;
     }
 
@@ -31,7 +32,7 @@ public class DoctorAdviceAdapter extends RecyclerView.Adapter<DoctorAdviceAdapte
 
     @Override
     public void onBindViewHolder(@NonNull DoctorAdviceViewHolder holder, int position) {
-        DoctorAdviceElement doctorAdviceElement = doctorAdviceList.get(position);
+        DoctorAdvices doctorAdviceElement = doctorAdviceList.get(position);
         holder.bind(doctorAdviceElement);
     }
 
@@ -48,7 +49,7 @@ public class DoctorAdviceAdapter extends RecyclerView.Adapter<DoctorAdviceAdapte
             doctorAdviceText = view.findViewById(R.id.doctor_advice_text);
         }
 
-        public void bind(DoctorAdviceElement doctorAdviceElement){
+        public void bind(DoctorAdvices doctorAdviceElement){
             doctorAdviceText.setText(doctorAdviceElement.getAdviceText());
         }
     }

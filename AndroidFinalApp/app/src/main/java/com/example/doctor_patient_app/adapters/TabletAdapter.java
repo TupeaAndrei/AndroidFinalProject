@@ -10,15 +10,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doctor_patient_app.R;
 import com.example.doctor_patient_app.models.TabletsElement;
+import com.example.doctor_patient_app.models.dbEntities.Tablets;
 
 import java.util.ArrayList;
 
 public class TabletAdapter extends RecyclerView.Adapter<TabletAdapter.TabletViewHolder> {
 
-    private ArrayList<TabletsElement> tabletList;
+    private ArrayList<Tablets> tabletList;
 
 
-    public TabletAdapter(ArrayList<TabletsElement> tabletList) {
+    public TabletAdapter(ArrayList<Tablets> tabletList) {
         this.tabletList = tabletList;
     }
 
@@ -32,7 +33,7 @@ public class TabletAdapter extends RecyclerView.Adapter<TabletAdapter.TabletView
 
     @Override
     public void onBindViewHolder(@NonNull TabletViewHolder holder, int position) {
-        TabletsElement tabletsElement = tabletList.get(position);
+        Tablets tabletsElement = tabletList.get(position);
         holder.bind(tabletsElement);
     }
 
@@ -54,7 +55,7 @@ public class TabletAdapter extends RecyclerView.Adapter<TabletAdapter.TabletView
             tabletIndications = view.findViewById(R.id.tablet_indications_text);
         }
 
-        public void bind(TabletsElement tabletsElement){
+        public void bind(Tablets tabletsElement){
             tabletName.setText(tabletsElement.getName());
             tabletDescription.setText(tabletsElement.getDescription());
             tabletIndications.setText(tabletsElement.getIndications());

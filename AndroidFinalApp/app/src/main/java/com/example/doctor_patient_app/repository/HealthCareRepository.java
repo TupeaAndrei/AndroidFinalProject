@@ -7,6 +7,8 @@ import com.example.doctor_patient_app.data.tasks.getTasks.GetAllDoctorsTask;
 import com.example.doctor_patient_app.data.tasks.getTasks.GetAllPatientsTask;
 import com.example.doctor_patient_app.data.tasks.getTasks.GetAllTabletsTask;
 import com.example.doctor_patient_app.data.tasks.getTasks.GetIdOfPatientTask;
+import com.example.doctor_patient_app.data.tasks.getTasks.GetPatientWithAdvicesTask;
+import com.example.doctor_patient_app.data.tasks.getTasks.GetPatientWithTabletsTask;
 import com.example.doctor_patient_app.data.tasks.insertTasks.InsertAdvicesTask;
 import com.example.doctor_patient_app.data.tasks.insertTasks.InsertDoctorTask;
 import com.example.doctor_patient_app.data.tasks.insertTasks.InsertPatientTask;
@@ -15,6 +17,8 @@ import com.example.doctor_patient_app.data.tasks.updateTasks.UpdatePatientTask;
 import com.example.doctor_patient_app.models.dbEntities.Doctor;
 import com.example.doctor_patient_app.models.dbEntities.DoctorAdvices;
 import com.example.doctor_patient_app.models.dbEntities.Patient;
+import com.example.doctor_patient_app.models.dbEntities.PatientWithAdvices;
+import com.example.doctor_patient_app.models.dbEntities.PatientWithTablets;
 import com.example.doctor_patient_app.models.dbEntities.Tablets;
 
 import java.util.ArrayList;
@@ -41,6 +45,14 @@ public class HealthCareRepository {
 
     public static interface OnGetPatientIdListener{
         void onSuccess(Integer patientId);
+    }
+
+    public static interface OnGetPatientWithTabletsListener{
+        void onSuccess(List<PatientWithTablets> patientsWithTablets);
+    }
+
+    public static interface OnGetPatientWithAdvicesListener{
+        void onSuccess(List<PatientWithAdvices> patientWithAdvices);
     }
 
     public HealthCareRepository(){
@@ -73,6 +85,14 @@ public class HealthCareRepository {
 
     public void getIdOfPatient(String email,OnGetPatientIdListener listener){
         new GetIdOfPatientTask(healthCareDataBase,listener).execute(email);
+    }
+
+    public void getPatientsWithTablets(Integer patientId,OnGetPatientWithTabletsListener listener){
+        new GetPatientWithTabletsTask(healthCareDataBase,listener).execute(patientId);
+    }
+
+    public void getPatientsWithAdvices(Integer patientId,OnGetPatientWithAdvicesListener listener){
+        new GetPatientWithAdvicesTask(healthCareDataBase,listener).execute(patientId);
     }
 
     public void getAllTablets(OnGetTabletsListener listener){

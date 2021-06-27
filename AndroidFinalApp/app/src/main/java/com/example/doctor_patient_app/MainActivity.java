@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.doctor_patient_app.fragments.DoctorAdvicesFragment;
 import com.example.doctor_patient_app.fragments.DoctorInitialFragment;
 import com.example.doctor_patient_app.fragments.DoctorLoginFragment;
 import com.example.doctor_patient_app.fragments.DoctorRegisterFragment;
@@ -15,6 +16,7 @@ import com.example.doctor_patient_app.fragments.PatientFragment;
 import com.example.doctor_patient_app.fragments.PatientInitialFragment;
 import com.example.doctor_patient_app.fragments.PatientLoginFragment;
 import com.example.doctor_patient_app.fragments.PatientRegisterFragment;
+import com.example.doctor_patient_app.fragments.TabletsFragment;
 import com.example.doctor_patient_app.fragments.WelcomeFragment;
 import com.example.doctor_patient_app.interfaces.IActivityFragmentCommunication;
 import com.example.doctor_patient_app.interfaces.IAdapterDatabaseCommunication;
@@ -103,6 +105,30 @@ public class MainActivity extends AppCompatActivity implements IActivityFragment
         patientFragment.setArguments(args);
         transaction.replace(R.id.frame_layout_id,patientFragment,"PatientFragment").addToBackStack(null).commit();
         setListener(patientFragment);
+    }
+
+    @Override
+    public void loadTabletsFragment(Integer patientId) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        TabletsFragment tabletsFragment = new TabletsFragment();
+        Bundle args = new Bundle();
+        args.putInt("patient_id",patientId);
+        tabletsFragment.setArguments(args);
+        transaction.replace(R.id.frame_layout_id,tabletsFragment,"TabletsFragment").
+                addToBackStack(null).commit();
+    }
+
+    @Override
+    public void loadDoctorAdvicesFragment(Integer patientId) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        DoctorAdvicesFragment doctorAdvicesFragment = new DoctorAdvicesFragment();
+        Bundle args = new Bundle();
+        args.putInt("patient_id",patientId);
+        doctorAdvicesFragment.setArguments(args);
+        transaction.replace(R.id.frame_layout_id,doctorAdvicesFragment,"DoctorAdvicesFragment")
+                .addToBackStack(null).commit();
     }
 
     private Bundle setPatientBundle(String name,String email,String age,

@@ -32,10 +32,10 @@ public interface PatientDAO {
     void deletePatient(Patient patient);
 
     @Transaction
-    @Query("Select * From Patient")
-    List<PatientWithTablets> getPatientWithTablets();
+    @Query("Select * From Patient where id == :patientId")
+    List<PatientWithTablets> getPatientWithTablets(Integer patientId);
 
     @Transaction
-    @Query("Select * From Patient")
-    List<PatientWithAdvices> getPatientWithAdvices();
+    @Query("Select * From Patient where id == :patientId")
+    List<PatientWithAdvices> getPatientWithAdvices(Integer patientId);
 }

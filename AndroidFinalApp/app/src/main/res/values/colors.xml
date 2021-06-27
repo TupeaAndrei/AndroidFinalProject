@@ -16,4 +16,8 @@
     <color name="dark_red">#E58A0D0D</color>
     <color name="faded_orange">#E8A15D32</color>
     <color name="pale_blue">#5FDCEC</color>
+    <color name="turqoise">#F25FECCB</color>
+    <color name="transparent_blue">#D85FA6EC</color>
+    <color name="light_purple">#CC6353AC</color>
+    <color name="pink">#E59D507C</color>
 </resources>

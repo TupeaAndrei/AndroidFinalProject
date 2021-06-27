@@ -39,6 +39,7 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
     private Button tabletsButton;
     private Button advicesButton;
 
+    private Integer patient_id;
     private String patientNameString;
     private String patientEmailString;
     private String patientAgeString;
@@ -94,15 +95,20 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
         patientWeight = view.findViewById(R.id.patient_weight_main);
         patientDiagnostic = view.findViewById(R.id.patient_diagnostic_main);
 
+        setupTextViews();
+
         tabletsButton = view.findViewById(R.id.patient_go_to_tablets);
         tabletsButton.setOnClickListener(v -> {
-            //go to tablets fragment
+            if (iActivityFragmentCommunication != null){
+                iActivityFragmentCommunication.loadTabletsFragment(patient_id);
+            }
         });
         advicesButton = view.findViewById(R.id.patient_go_to_advices);
         advicesButton.setOnClickListener(v -> {
-            //go to advices fragment
+            if (iActivityFragmentCommunication != null){
+                iActivityFragmentCommunication.loadDoctorAdvicesFragment(patient_id);
+            }
         });
-        setupTextViews();
     }
 
     private void setupTextViews(){
@@ -112,6 +118,8 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
         patientHeight.setText(patientHeightString);
         patientWeight.setText(patientWeightString);
         patientDiagnostic.setText(patientDiagnosticString);
+
+        healthCareRepository.getIdOfPatient(patientEmailString, patientId -> patient_id = patientId);
     }
 
     private void setupRecyclerView(View view){
@@ -147,7 +155,7 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
         }
         Patient patient = new Patient(patientNameString,patientEmailString,patientDiagnosticString,
                 Integer.parseInt(age),Integer.parseInt(height),Integer.parseInt(weight),id);
-        healthCareRepository.getIdOfPatient(patientEmailString, patient::setId);
+        patient.setId(patient_id);
         healthCareRepository.updatePatient(patient, () -> {
             Toast.makeText(getActivity().getApplicationContext(),"Patient succsesfully updated!",Toast.LENGTH_LONG).show();
         });
