@@ -19,6 +19,9 @@ public interface PatientDAO {
     @Query("SELECT * FROM patient")
     List<Patient> getAllPatients();
 
+    @Query("Select id FROM Patient where email == :patientEmail")
+    Integer getIdOfPatientWithEmail(String patientEmail);
+
     @Insert
     void insertPatient(Patient patient);
 

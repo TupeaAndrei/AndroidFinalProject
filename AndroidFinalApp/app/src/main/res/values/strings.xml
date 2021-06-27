@@ -11,4 +11,6 @@
     <string name="weight">Weight</string>
     <string name="welcome_title">Health Care App</string>
     <string name="register">Register</string>
+    <string name="tablets">Tablets</string>
+    <string name="doctor_advices">Doctor Advices</string>
 </resources>

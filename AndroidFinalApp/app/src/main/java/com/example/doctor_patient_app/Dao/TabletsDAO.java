@@ -16,6 +16,9 @@ public interface TabletsDAO {
     @Query("SELECT * FROM tablets")
     List<Tablets> getAllTablets();
 
+    @Query("Select id From tablets where name == :tabletName")
+    Integer getIdOfTabletWithName(String tabletName);
+
     @Insert
     void insertTablet(Tablets tablet);
 

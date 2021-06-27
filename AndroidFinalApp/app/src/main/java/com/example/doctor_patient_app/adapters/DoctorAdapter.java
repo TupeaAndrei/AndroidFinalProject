@@ -10,16 +10,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doctor_patient_app.R;
+import com.example.doctor_patient_app.interfaces.IAdapterDatabaseCommunication;
 import com.example.doctor_patient_app.models.DoctorElement;
+import com.example.doctor_patient_app.models.dbEntities.Doctor;
 
 import java.util.ArrayList;
 
 public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorViewHolder> {
 
-    private final ArrayList<DoctorElement> doctorList;
+    private final ArrayList<Doctor> doctorList;
     private View view;
 
-    public DoctorAdapter(ArrayList<DoctorElement> doctorList){
+    private IAdapterDatabaseCommunication iAdapterDatabaseCommunication;
+
+    public DoctorAdapter(ArrayList<Doctor> doctorList){
         this.doctorList = doctorList;
     }
 
@@ -33,13 +37,17 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
 
     @Override
     public void onBindViewHolder(@NonNull DoctorViewHolder holder, int position) {
-        DoctorElement doctorElement = doctorList.get(position);
+        Doctor doctorElement = doctorList.get(position);
         holder.bind(doctorElement);
-        ImageView subscribeButton = holder.itemView.findViewById(R.id.subscribe_doctor_image);
+        ImageView subscribeButton = holder.doctorSubscribe;
         subscribeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 //subscribe the patient to this specific doctor
+                if (iAdapterDatabaseCommunication != null){
+                    iAdapterDatabaseCommunication.updateThisPatient(holder.doctorId);
+
+                }
             }
         });
     }
@@ -52,9 +60,15 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+        if (recyclerView.getContext() instanceof IAdapterDatabaseCommunication){
+            iAdapterDatabaseCommunication = (IAdapterDatabaseCommunication) recyclerView.getContext();
+        }
     }
 
+
     class DoctorViewHolder extends RecyclerView.ViewHolder{
+        private Integer doctorId;
+
         private final TextView doctorName;
         private final TextView doctorEmail;
         private final TextView doctorAge;
@@ -71,10 +85,14 @@ public class DoctorAdapter extends RecyclerView.Adapter<DoctorAdapter.DoctorView
             doctorSubscribe = view.findViewById(R.id.subscribe_doctor_image);
         }
 
-        void bind(DoctorElement doctorElement){
+        void bind(Doctor doctorElement){
+            doctorId = doctorElement.getId();
+            if (doctorElement.getSpecialization() == null){
+                doctorElement.setSpecialization("Not specified!");
+            }
             doctorName.setText(doctorElement.getName());
             doctorEmail.setText(doctorElement.getEmail());
-            doctorAge.setText(doctorElement.getAge());
+            doctorAge.setText(String.valueOf(doctorElement.getAge()));
             doctorSpecialization.setText(doctorElement.getSpecialization());
         }
     }

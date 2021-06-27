@@ -6,10 +6,12 @@ import com.example.doctor_patient_app.data.tasks.getTasks.GetAllDoctorAdvicesTas
 import com.example.doctor_patient_app.data.tasks.getTasks.GetAllDoctorsTask;
 import com.example.doctor_patient_app.data.tasks.getTasks.GetAllPatientsTask;
 import com.example.doctor_patient_app.data.tasks.getTasks.GetAllTabletsTask;
+import com.example.doctor_patient_app.data.tasks.getTasks.GetIdOfPatientTask;
 import com.example.doctor_patient_app.data.tasks.insertTasks.InsertAdvicesTask;
 import com.example.doctor_patient_app.data.tasks.insertTasks.InsertDoctorTask;
 import com.example.doctor_patient_app.data.tasks.insertTasks.InsertPatientTask;
 import com.example.doctor_patient_app.data.tasks.insertTasks.InsertTabletTask;
+import com.example.doctor_patient_app.data.tasks.updateTasks.UpdatePatientTask;
 import com.example.doctor_patient_app.models.dbEntities.Doctor;
 import com.example.doctor_patient_app.models.dbEntities.DoctorAdvices;
 import com.example.doctor_patient_app.models.dbEntities.Patient;
@@ -20,6 +22,26 @@ import java.util.List;
 
 public class HealthCareRepository {
     private HealthCareDataBase healthCareDataBase;
+
+    public static interface OnGetDoctorListener{
+        void onSuccess(List<Doctor> doctors);
+    }
+
+    public static interface OnGetPatientListener{
+        void onSuccess(List<Patient> patients);
+    }
+
+    public static interface OnGetTabletsListener{
+        void onSuccess(List<Tablets> tablets);
+    }
+
+    public static interface OnGetDoctorAdvicesListener{
+        void onSuccess(List<DoctorAdvices> doctorAdvices);
+    }
+
+    public static interface OnGetPatientIdListener{
+        void onSuccess(Integer patientId);
+    }
 
     public HealthCareRepository(){
         healthCareDataBase = ApplicationController.getHealthCareDataBase();
@@ -41,19 +63,27 @@ public class HealthCareRepository {
         new InsertAdvicesTask(healthCareDataBase,listener).execute(advice);
     }
 
-    public void getAllDoctors(HealthCareRepositoryListener listener){
+    public void getAllDoctors(OnGetDoctorListener listener){
         new GetAllDoctorsTask(healthCareDataBase,listener).execute();
     }
 
-    public void getAllPatients(HealthCareRepositoryListener listener){
+    public void getAllPatients(OnGetPatientListener listener){
         new GetAllPatientsTask(healthCareDataBase,listener).execute();
     }
 
-    public void getAllTablets(HealthCareRepositoryListener listener){
+    public void getIdOfPatient(String email,OnGetPatientIdListener listener){
+        new GetIdOfPatientTask(healthCareDataBase,listener).execute(email);
+    }
+
+    public void getAllTablets(OnGetTabletsListener listener){
         new GetAllTabletsTask(healthCareDataBase,listener).execute();
     }
 
-    public void getAllDoctorAdvices(HealthCareRepositoryListener listener){
+    public void getAllDoctorAdvices(OnGetDoctorAdvicesListener listener){
         new GetAllDoctorAdvicesTask(healthCareDataBase,listener).execute();
+    }
+
+    public void updatePatient(Patient patient,HealthCareRepositoryListener listener){
+        new UpdatePatientTask(healthCareDataBase,listener).execute(patient);
     }
 }

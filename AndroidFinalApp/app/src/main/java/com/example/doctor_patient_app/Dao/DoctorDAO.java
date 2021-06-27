@@ -30,4 +30,7 @@ public interface DoctorDAO {
     @Transaction
     @Query("Select * From Doctor")
     List<DoctorsWithPatients> getDoctorWithPatients();
+
+    @Query("Select id From Doctor where email == :doctorEmail")
+    Integer getIdOfDoctorWithEmail(String doctorEmail);
 }

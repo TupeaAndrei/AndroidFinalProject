@@ -4,15 +4,16 @@ import android.os.AsyncTask;
 
 import com.example.doctor_patient_app.data.HealthCareDataBase;
 import com.example.doctor_patient_app.models.dbEntities.Patient;
+import com.example.doctor_patient_app.repository.HealthCareRepository;
 import com.example.doctor_patient_app.repository.HealthCareRepositoryListener;
 
 import java.util.List;
 
 public class GetAllPatientsTask extends AsyncTask<Void,Void, List<Patient>> {
     private HealthCareDataBase healthCareDataBase;
-    private HealthCareRepositoryListener listener;
+    private HealthCareRepository.OnGetPatientListener listener;
 
-    public GetAllPatientsTask(HealthCareDataBase healthCareDataBase, HealthCareRepositoryListener listener) {
+    public GetAllPatientsTask(HealthCareDataBase healthCareDataBase, HealthCareRepository.OnGetPatientListener listener) {
         this.healthCareDataBase = healthCareDataBase;
         this.listener = listener;
     }
@@ -25,6 +26,6 @@ public class GetAllPatientsTask extends AsyncTask<Void,Void, List<Patient>> {
     @Override
     protected void onPostExecute(List<Patient> patients) {
         super.onPostExecute(patients);
-        listener.onSuccess();
+        listener.onSuccess(patients);
     }
 }

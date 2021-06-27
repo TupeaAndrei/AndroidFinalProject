@@ -71,9 +71,9 @@ public class DoctorRegisterFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.doctor_register,container,false);
         //this function is called so that the database inspector can initialize (for debug use only)
-        healthCareRepository.getAllDoctors(new HealthCareRepositoryListener() {
+        healthCareRepository.getAllDoctors(new HealthCareRepository.OnGetDoctorListener() {
             @Override
-            public void onSuccess() {
+            public void onSuccess(List<Doctor> doctors) {
 
             }
         });
