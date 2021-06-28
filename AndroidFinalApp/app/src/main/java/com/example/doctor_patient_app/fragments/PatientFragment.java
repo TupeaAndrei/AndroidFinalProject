@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.doctor_patient_app.R;
 import com.example.doctor_patient_app.adapters.DoctorAdapter;
@@ -56,6 +57,8 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
     private HealthCareRepository healthCareRepository = new HealthCareRepository();
 
     private ArrayList<Patient> patientList= new ArrayList<>();
+
+    private SwipeRefreshLayout swipeRefreshLayout;
 
 
 
@@ -121,6 +124,11 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
                 iActivityFragmentCommunication.loadUpdatePatientFragment(patient);
             }
         });
+        swipeRefreshLayout = view.findViewById(R.id.patient_fragm_swipe);
+        swipeRefreshLayout.setOnRefreshListener(() -> {
+            completePatient();
+            swipeRefreshLayout.setRefreshing(false);
+        });
         completePatient();
 
     }
@@ -138,7 +146,7 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
 
     private void setupRecyclerView(View view){
         RecyclerView recyclerView = view.findViewById(R.id.patient_doctor_rv);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(view.getContext());
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false);
 
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(doctorAdapter);
@@ -188,20 +196,22 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
             @Override
             public void onSuccess(List<Patient> patients) {
                 patientList.addAll(patients);
-                Patient searchedPatient = patientList.get(0);
-                patientNameString = searchedPatient.getName();
-                patientName.setText(patientNameString);
-                patientAgeString = searchedPatient.getAge().toString();
-                patientAge.setText(patientAgeString);
-                patientWeightString = searchedPatient.getWeight().toString();
-                patientWeight.setText(patientWeightString);
-                patientHeightString = searchedPatient.getHeight().toString();
-                patientHeight.setText(patientHeightString);
-                if (searchedPatient.getDiagnostic() != null){
-                    patientDiagnosticString = searchedPatient.getDiagnostic();
-                    patientDiagnostic.setText(patientDiagnosticString);
+                if (patientList.size() > 0) {
+                    Patient searchedPatient = patientList.get(0);
+                    patientNameString = searchedPatient.getName();
+                    patientName.setText(patientNameString);
+                    patientAgeString = searchedPatient.getAge().toString();
+                    patientAge.setText(patientAgeString);
+                    patientWeightString = searchedPatient.getWeight().toString();
+                    patientWeight.setText(patientWeightString);
+                    patientHeightString = searchedPatient.getHeight().toString();
+                    patientHeight.setText(patientHeightString);
+                    if (searchedPatient.getDiagnostic() != null) {
+                        patientDiagnosticString = searchedPatient.getDiagnostic();
+                        patientDiagnostic.setText(patientDiagnosticString);
+                    }
+                    doctorId = searchedPatient.getDoctorId();
                 }
-                doctorId = searchedPatient.getDoctorId();
             }
         });
     }

@@ -142,13 +142,15 @@ public class DoctorFragment extends Fragment {
         healthCareRepository.getDoctorWithEmail(doctorEmailString, new HealthCareRepository.OnGetDoctorWithEmailListener() {
             @Override
             public void onSuccess(Doctor doctor) {
-                Doctor searchedDoctor = doctor;
-                doctorNameString = searchedDoctor.getName();
-                doctorName.setText(doctorNameString);
-                doctorAgeString = searchedDoctor.getAge().toString();
-                doctorAge.setText(doctorAgeString);
-                doctorSpecializationString = searchedDoctor.getSpecialization();
-                doctorSpecialization.setText(doctorSpecializationString);
+                if (doctor != null) {
+                    Doctor searchedDoctor = doctor;
+                    doctorNameString = searchedDoctor.getName();
+                    doctorName.setText(doctorNameString);
+                    doctorAgeString = searchedDoctor.getAge().toString();
+                    doctorAge.setText(doctorAgeString);
+                    doctorSpecializationString = searchedDoctor.getSpecialization();
+                    doctorSpecialization.setText(doctorSpecializationString);
+                }
             }
         });
     }
