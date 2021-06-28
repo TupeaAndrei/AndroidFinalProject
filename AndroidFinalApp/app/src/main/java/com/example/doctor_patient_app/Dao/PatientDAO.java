@@ -31,6 +31,7 @@ public interface PatientDAO {
     @Update
     void updatePatient(Patient patient);
 
+
     @Delete
     void deletePatient(Patient patient);
 

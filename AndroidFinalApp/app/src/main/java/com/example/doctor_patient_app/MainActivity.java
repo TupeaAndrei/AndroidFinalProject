@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.example.doctor_patient_app.fragments.DoctorAdvicesFragment;
 import com.example.doctor_patient_app.fragments.DoctorFragment;
+import com.example.doctor_patient_app.fragments.DoctorHelperFragment;
 import com.example.doctor_patient_app.fragments.DoctorInitialFragment;
 import com.example.doctor_patient_app.fragments.DoctorLoginFragment;
 import com.example.doctor_patient_app.fragments.DoctorRegisterFragment;
@@ -172,6 +173,19 @@ public class MainActivity extends AppCompatActivity implements IActivityFragment
         updatePatientFragment.setArguments(args);
         transaction.replace(R.id.frame_layout_id,updatePatientFragment,"UpdatePatientFragment")
                 .addToBackStack(null).commit();
+    }
+
+    @Override
+    public void loadDoctorHelperFragment(Patient patient) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        DoctorHelperFragment doctorHelperFragment = new DoctorHelperFragment();
+        Bundle args = BundleMaker.setFullPatientBundle(patient.getId(),patient.getName(),
+                patient.getEmail(),patient.getDiagnostic(),patient.getAge(),patient.getHeight(),
+                patient.getWeight(),patient.getDoctorId());
+        doctorHelperFragment.setArguments(args);
+        transaction.replace(R.id.frame_layout_id,doctorHelperFragment,"DoctorHelperFragment").
+                addToBackStack(null).commit();
     }
 
 

@@ -17,4 +17,5 @@ public interface IActivityFragmentCommunication {
     void loadDoctorAdvicesFragment(Integer patientId);
     void loadUpdateDoctorFragment(Doctor doctor);
     void loadUpdatePatientFragment(Patient patient);
+    void loadDoctorHelperFragment(Patient patient);
 }

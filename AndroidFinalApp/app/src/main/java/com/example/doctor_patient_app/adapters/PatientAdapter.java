@@ -9,6 +9,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doctor_patient_app.R;
+import com.example.doctor_patient_app.interfaces.IActivityFragmentCommunication;
 import com.example.doctor_patient_app.models.PatientElement;
 import com.example.doctor_patient_app.models.dbEntities.Patient;
 
@@ -17,6 +18,8 @@ import java.util.ArrayList;
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientViewHolder> {
 
     private ArrayList<Patient> patientList;
+
+    private IActivityFragmentCommunication iActivityFragmentCommunication;
 
     public PatientAdapter(ArrayList<Patient> patientList){
         this.patientList = patientList;
@@ -34,6 +37,18 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
     public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
         Patient patientElement = patientList.get(position);
         holder.bind(patientElement);
+        holder.itemView.setOnClickListener(v -> {
+            if (iActivityFragmentCommunication != null){
+                Integer age = Integer.parseInt(holder.patientAge.getText().toString());
+                Integer height = Integer.parseInt(holder.patientHeight.getText().toString());
+                Integer weight = Integer.parseInt(holder.patientWeight.getText().toString());
+                Integer doctorId = Integer.parseInt(holder.doctorId.toString());
+                Patient patient = new Patient(holder.patientName.getText().toString(),holder.patientEmail.getText().toString(),
+                        holder.patientDiagnostic.getText().toString(), age,height,weight,doctorId);
+                patient.setId(holder.patientId);
+                iActivityFragmentCommunication.loadDoctorHelperFragment(patient);
+            }
+        });
     }
 
     @Override
@@ -44,10 +59,15 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
     @Override
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
+        if (recyclerView.getContext() instanceof IActivityFragmentCommunication){
+            iActivityFragmentCommunication = (IActivityFragmentCommunication) recyclerView.getContext();
+        }
 
     }
 
     class PatientViewHolder extends RecyclerView.ViewHolder{
+        private Integer patientId;
+        private Integer doctorId;
         private TextView patientName;
         private TextView patientEmail;
         private TextView patientAge;
@@ -66,6 +86,8 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
         }
 
         public void bind(Patient patientElement){
+            patientId = patientElement.getId();
+            doctorId = patientElement.getDoctorId();
             patientName.setText(patientElement.getName());
             patientEmail.setText(patientElement.getEmail());
             patientAge.setText(String.valueOf(patientElement.getAge()));

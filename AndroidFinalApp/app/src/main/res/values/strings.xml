@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Doctor-Patient-App</string>
+    <string name="app_name">HealthCare Application</string>
     <string name="doctor_registration">Doctor Registration</string>
     <string name="email_hint">Enter email...</string>
     <string name="hint_password">Enter password..</string>
@@ -21,4 +21,13 @@
     <string name="done">Done</string>
     <string name="enter_height">Enter height...</string>
     <string name="enter_weight">Enter weight..</string>
+    <string name="diagnostic">Diagnostic:</string>
+    <string name="enter_diagnostic">Enter diagnostic...</string>
+    <string name="enter">Enter</string>
+    <string name="enter_advice_text">Enter advice text:</string>
+    <string name="doctor_s_advice">Doctor\'s advice</string>
+    <string name="enter_tablet_for_patient">Enter Tablet for patient</string>
+    <string name="name">Name:</string>
+    <string name="enter_indications">Enter indications...</string>
+    <string name="enter_description">Enter description...</string>
 </resources>

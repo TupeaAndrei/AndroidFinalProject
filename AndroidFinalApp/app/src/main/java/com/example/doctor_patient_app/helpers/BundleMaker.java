@@ -53,4 +53,20 @@ public class BundleMaker {
         args.putString("patient_email",email);
         return args;
     }
+
+    public static Bundle setFullPatientBundle(Integer patientId,String patientName,String patientEmail,
+                                              String patientDiagnostic,Integer patientAge,
+                                              Integer patientHeight,Integer patientWeight,
+                                              Integer doctorId){
+        Bundle args = new Bundle();
+        args.putInt("patient_id",patientId);
+        args.putString("patient_name",patientName);
+        args.putString("patient_email",patientEmail);
+        args.putString("patient_diagnostic",patientDiagnostic);
+        args.putInt("patient_age",patientAge);
+        args.putInt("patient_height",patientHeight);
+        args.putInt("patient_weight",patientWeight);
+        args.putInt("doctor_id",doctorId);
+        return args;
+    }
 }
