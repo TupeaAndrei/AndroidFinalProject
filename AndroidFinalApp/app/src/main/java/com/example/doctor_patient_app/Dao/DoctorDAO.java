@@ -18,6 +18,12 @@ public interface DoctorDAO {
     @Query("Select * From doctor")
     List<Doctor> getAllDoctors();
 
+    @Query("Select id FROM Doctor where email == :doctorEmail")
+    Integer getDoctorIdWithEmail(String doctorEmail);
+
+    @Query("Select * FROM Doctor where email== :doctorEmail")
+    Doctor getDoctorWithEmail(String doctorEmail);
+
     @Insert
     void insertDoctor(Doctor doctor);
 
@@ -28,8 +34,8 @@ public interface DoctorDAO {
     void deleteDoctor(Doctor doctor);
 
     @Transaction
-    @Query("Select * From Doctor")
-    List<DoctorsWithPatients> getDoctorWithPatients();
+    @Query("Select * From Doctor where id == :doctorId")
+    List<DoctorsWithPatients> getDoctorWithPatients(Integer doctorId);
 
     @Query("Select id From Doctor where email == :doctorEmail")
     Integer getIdOfDoctorWithEmail(String doctorEmail);

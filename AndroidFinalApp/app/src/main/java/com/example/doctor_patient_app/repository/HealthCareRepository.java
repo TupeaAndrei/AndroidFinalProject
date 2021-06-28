@@ -6,8 +6,12 @@ import com.example.doctor_patient_app.data.tasks.getTasks.GetAllDoctorAdvicesTas
 import com.example.doctor_patient_app.data.tasks.getTasks.GetAllDoctorsTask;
 import com.example.doctor_patient_app.data.tasks.getTasks.GetAllPatientsTask;
 import com.example.doctor_patient_app.data.tasks.getTasks.GetAllTabletsTask;
+import com.example.doctor_patient_app.data.tasks.getTasks.GetDoctorWithEmailTask;
+import com.example.doctor_patient_app.data.tasks.getTasks.GetDoctorWithPatientsTask;
+import com.example.doctor_patient_app.data.tasks.getTasks.GetIdOfDoctorTask;
 import com.example.doctor_patient_app.data.tasks.getTasks.GetIdOfPatientTask;
 import com.example.doctor_patient_app.data.tasks.getTasks.GetPatientWithAdvicesTask;
+import com.example.doctor_patient_app.data.tasks.getTasks.GetPatientWithEmailTask;
 import com.example.doctor_patient_app.data.tasks.getTasks.GetPatientWithTabletsTask;
 import com.example.doctor_patient_app.data.tasks.insertTasks.InsertAdvicesTask;
 import com.example.doctor_patient_app.data.tasks.insertTasks.InsertDoctorTask;
@@ -16,6 +20,7 @@ import com.example.doctor_patient_app.data.tasks.insertTasks.InsertTabletTask;
 import com.example.doctor_patient_app.data.tasks.updateTasks.UpdatePatientTask;
 import com.example.doctor_patient_app.models.dbEntities.Doctor;
 import com.example.doctor_patient_app.models.dbEntities.DoctorAdvices;
+import com.example.doctor_patient_app.models.dbEntities.DoctorsWithPatients;
 import com.example.doctor_patient_app.models.dbEntities.Patient;
 import com.example.doctor_patient_app.models.dbEntities.PatientWithAdvices;
 import com.example.doctor_patient_app.models.dbEntities.PatientWithTablets;
@@ -29,6 +34,18 @@ public class HealthCareRepository {
 
     public static interface OnGetDoctorListener{
         void onSuccess(List<Doctor> doctors);
+    }
+
+    public static interface OnGetDoctorWithPatientsListener{
+        void onSuccess(List<DoctorsWithPatients> doctorsWithPatients);
+    }
+
+    public static interface OnGetDoctorIdWithEmailListener{
+        void onSuccess(Integer doctorId);
+    }
+
+    public static interface OnGetDoctorWithEmailListener{
+        void onSuccess(Doctor doctor);
     }
 
     public static interface OnGetPatientListener{
@@ -79,12 +96,28 @@ public class HealthCareRepository {
         new GetAllDoctorsTask(healthCareDataBase,listener).execute();
     }
 
+    public void getDoctorsWithPatients(Integer doctorId, OnGetDoctorWithPatientsListener listener){
+        new GetDoctorWithPatientsTask(healthCareDataBase,listener).execute(doctorId);
+    }
+
+    public void getIdOfDoctorWithEmail(String email,OnGetDoctorIdWithEmailListener listener){
+        new GetIdOfDoctorTask(healthCareDataBase,listener).execute(email);
+    }
+
+    public void getDoctorWithEmail(String email,OnGetDoctorWithEmailListener listener){
+        new GetDoctorWithEmailTask(healthCareDataBase,listener).execute(email);
+    }
+
     public void getAllPatients(OnGetPatientListener listener){
         new GetAllPatientsTask(healthCareDataBase,listener).execute();
     }
 
     public void getIdOfPatient(String email,OnGetPatientIdListener listener){
         new GetIdOfPatientTask(healthCareDataBase,listener).execute(email);
+    }
+
+    public void getPatientWithEmail(String email,OnGetPatientListener listener){
+        new GetPatientWithEmailTask(healthCareDataBase,listener).execute(email);
     }
 
     public void getPatientsWithTablets(Integer patientId,OnGetPatientWithTabletsListener listener){

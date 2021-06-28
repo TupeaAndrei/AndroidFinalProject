@@ -46,6 +46,7 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
     private String patientHeightString;
     private String patientWeightString;
     private String patientDiagnosticString;
+    private Integer doctorId;
 
     private IActivityFragmentCommunication iActivityFragmentCommunication;
 
@@ -53,6 +54,9 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
     private DoctorAdapter doctorAdapter = new DoctorAdapter(doctorList);
 
     private HealthCareRepository healthCareRepository = new HealthCareRepository();
+
+    private ArrayList<Patient> patientList= new ArrayList<>();
+
 
 
     public PatientFragment newInstance(String name,String email,String age,String height,String weight,String diagnostic){
@@ -109,6 +113,8 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
                 iActivityFragmentCommunication.loadDoctorAdvicesFragment(patient_id);
             }
         });
+        completePatient();
+
     }
 
     private void setupTextViews(){
@@ -167,5 +173,28 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
         if (context instanceof IActivityFragmentCommunication){
             iActivityFragmentCommunication = (IActivityFragmentCommunication) context;
         }
+    }
+
+    private void completePatient(){
+        healthCareRepository.getPatientWithEmail(patientEmailString, new HealthCareRepository.OnGetPatientListener() {
+            @Override
+            public void onSuccess(List<Patient> patients) {
+                patientList.addAll(patients);
+                Patient searchedPatient = patientList.get(0);
+                patientNameString = searchedPatient.getName();
+                patientName.setText(patientNameString);
+                patientAgeString = searchedPatient.getAge().toString();
+                patientAge.setText(patientAgeString);
+                patientWeightString = searchedPatient.getWeight().toString();
+                patientWeight.setText(patientWeightString);
+                patientHeightString = searchedPatient.getHeight().toString();
+                patientHeight.setText(patientHeightString);
+                if (searchedPatient.getDiagnostic() != null){
+                    patientDiagnosticString = searchedPatient.getDiagnostic();
+                    patientDiagnostic.setText(patientDiagnosticString);
+                }
+                doctorId = searchedPatient.getDoctorId();
+            }
+        });
     }
 }

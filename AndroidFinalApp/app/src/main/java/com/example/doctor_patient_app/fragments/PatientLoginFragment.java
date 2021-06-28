@@ -16,8 +16,14 @@ import androidx.fragment.app.Fragment;
 import com.example.doctor_patient_app.R;
 import com.example.doctor_patient_app.helpers.Validators;
 import com.example.doctor_patient_app.interfaces.IActivityFragmentCommunication;
+import com.example.doctor_patient_app.models.dbEntities.Doctor;
+import com.example.doctor_patient_app.models.dbEntities.Patient;
+import com.example.doctor_patient_app.repository.HealthCareRepository;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PatientLoginFragment extends Fragment {
     private View view;
@@ -30,6 +36,8 @@ public class PatientLoginFragment extends Fragment {
     private FirebaseAuth mAuth;
 
     private IActivityFragmentCommunication iActivityFragmentCommunication;
+
+    private HealthCareRepository healthCareRepository = new HealthCareRepository();
 
     public static PatientLoginFragment newInstance(){
         Bundle args = new Bundle();
@@ -110,6 +118,10 @@ public class PatientLoginFragment extends Fragment {
                         task -> {
                             if (task.isSuccessful()){
                                 FirebaseUser user = mAuth.getCurrentUser();
+                                Patient loggedPatient = new Patient("null",email,null,0,0,0,0);
+                                if (iActivityFragmentCommunication != null){
+                                    iActivityFragmentCommunication.loadMainPatientFragment(loggedPatient);
+                                }
                                 Toast.makeText(getContext(),"Succesful login!",Toast.LENGTH_SHORT).show();
                             }else{
                                 Toast.makeText(getContext(),"Login failed!",Toast.LENGTH_SHORT).show();
@@ -124,4 +136,5 @@ public class PatientLoginFragment extends Fragment {
             iActivityFragmentCommunication = (IActivityFragmentCommunication) context;
         }
     }
+
 }

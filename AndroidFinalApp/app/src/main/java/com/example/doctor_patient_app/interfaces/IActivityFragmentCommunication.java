@@ -1,5 +1,6 @@
 package com.example.doctor_patient_app.interfaces;
 
+import com.example.doctor_patient_app.models.dbEntities.Doctor;
 import com.example.doctor_patient_app.models.dbEntities.Patient;
 
 public interface IActivityFragmentCommunication {
@@ -11,6 +12,7 @@ public interface IActivityFragmentCommunication {
     void loadPatientRegisterFragment();
     void loadPatientLoginFragment();
     void loadMainPatientFragment(Patient patient);
+    void loadMainDoctorFragment(Doctor doctor);
     void loadTabletsFragment(Integer patientId);
     void loadDoctorAdvicesFragment(Integer patientId);
 }

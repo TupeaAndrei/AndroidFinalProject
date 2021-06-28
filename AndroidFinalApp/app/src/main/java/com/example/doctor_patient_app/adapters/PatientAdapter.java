@@ -10,14 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.doctor_patient_app.R;
 import com.example.doctor_patient_app.models.PatientElement;
+import com.example.doctor_patient_app.models.dbEntities.Patient;
 
 import java.util.ArrayList;
 
 public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientViewHolder> {
 
-    private ArrayList<PatientElement> patientList;
+    private ArrayList<Patient> patientList;
 
-    public PatientAdapter(ArrayList<PatientElement> patientList){
+    public PatientAdapter(ArrayList<Patient> patientList){
         this.patientList = patientList;
     }
 
@@ -31,7 +32,7 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
 
     @Override
     public void onBindViewHolder(@NonNull PatientViewHolder holder, int position) {
-        PatientElement patientElement = patientList.get(position);
+        Patient patientElement = patientList.get(position);
         holder.bind(patientElement);
     }
 
@@ -64,12 +65,12 @@ public class PatientAdapter extends RecyclerView.Adapter<PatientAdapter.PatientV
             patientDiagnostic = view.findViewById(R.id.patient_diagnostic);
         }
 
-        public void bind(PatientElement patientElement){
+        public void bind(Patient patientElement){
             patientName.setText(patientElement.getName());
             patientEmail.setText(patientElement.getEmail());
-            patientAge.setText(patientElement.getAge());
-            patientHeight.setText(patientElement.getHeight());
-            patientWeight.setText(patientElement.getWeight());
+            patientAge.setText(String.valueOf(patientElement.getAge()));
+            patientHeight.setText(String.valueOf(patientElement.getHeight()));
+            patientWeight.setText(String.valueOf(patientElement.getWeight()));
             patientDiagnostic.setText(patientElement.getDiagnostic());
         }
     }

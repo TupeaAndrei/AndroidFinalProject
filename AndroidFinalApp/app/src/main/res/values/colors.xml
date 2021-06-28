@@ -8,8 +8,10 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="light_green">#4CAF50</color>
+    <color name="faded_green">#EF84DA3C</color>
     <color name="light_yellow">#C4DB4D</color>
     <color name="plain_orange">#C5753C</color>
+    <color name="orange">#F19C00</color>
     <color name="blue">#DB192BC9</color>
     <color name="faded_blue">#E53A5ABC</color>
     <color name="red">#E5D93636</color>

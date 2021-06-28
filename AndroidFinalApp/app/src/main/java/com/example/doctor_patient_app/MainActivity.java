@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.doctor_patient_app.fragments.DoctorAdvicesFragment;
+import com.example.doctor_patient_app.fragments.DoctorFragment;
 import com.example.doctor_patient_app.fragments.DoctorInitialFragment;
 import com.example.doctor_patient_app.fragments.DoctorLoginFragment;
 import com.example.doctor_patient_app.fragments.DoctorRegisterFragment;
@@ -21,6 +22,7 @@ import com.example.doctor_patient_app.fragments.WelcomeFragment;
 import com.example.doctor_patient_app.interfaces.IActivityFragmentCommunication;
 import com.example.doctor_patient_app.interfaces.IAdapterDatabaseCommunication;
 import com.example.doctor_patient_app.interfaces.IFragmentActivityCommunication;
+import com.example.doctor_patient_app.models.dbEntities.Doctor;
 import com.example.doctor_patient_app.models.dbEntities.Patient;
 
 public class MainActivity extends AppCompatActivity implements IActivityFragmentCommunication, IAdapterDatabaseCommunication {
@@ -108,6 +110,18 @@ public class MainActivity extends AppCompatActivity implements IActivityFragment
     }
 
     @Override
+    public void loadMainDoctorFragment(Doctor doctor) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        DoctorFragment doctorFragment = new DoctorFragment();
+        Bundle args = setDoctorBundle(doctor.getName(),doctor.getEmail(),doctor.getAge().toString(),
+                doctor.getSpecialization());
+        doctorFragment.setArguments(args);
+        transaction.replace(R.id.frame_layout_id,doctorFragment,"DoctorFragment")
+                .addToBackStack(null).commit();
+    }
+
+    @Override
     public void loadTabletsFragment(Integer patientId) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
@@ -153,6 +167,21 @@ public class MainActivity extends AppCompatActivity implements IActivityFragment
         args.putString("patient_height",height);
         args.putString("patient_weight",weight);
         args.putString("patient_diagnostic",diagnostic);
+        return args;
+    }
+
+    private Bundle setDoctorBundle(String username,String email,String age,String specialization){
+        Bundle args = new Bundle();
+        if (age.equals("0")){
+            age = notSpecifiedError;
+        }
+        if (specialization == null){
+            specialization = notSpecifiedError;
+        }
+        args.putString("doctor_name",username);
+        args.putString("doctor_email",email);
+        args.putString("doctor_age",age);
+        args.putString("doctor_specialization",specialization);
         return args;
     }
 

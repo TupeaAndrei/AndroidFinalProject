@@ -138,12 +138,16 @@ public class DoctorRegisterFragment extends Fragment {
                         if (task.isSuccessful()){
                             FirebaseUser user = mAuth.getCurrentUser();
                             Doctor doctor = new Doctor(username,email,0,null);
+                            if (iActivityFragmentCommunication != null){
+                                iActivityFragmentCommunication.loadMainDoctorFragment(doctor);
+                            }
                             healthCareRepository.insertDoctor(doctor, new HealthCareRepositoryListener() {
                                 @Override
                                 public void onSuccess() {
                                     Toast.makeText(getActivity(),"Doctor insert succesfull!",Toast.LENGTH_SHORT).show();
                                 }
                             });
+
                             Toast.makeText(getContext(),"Authentification succesfull!",Toast.LENGTH_SHORT).show();
                         }else{
                             Toast.makeText(getContext(),"Authentification failed!",Toast.LENGTH_SHORT).show();

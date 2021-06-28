@@ -16,6 +16,7 @@ import androidx.fragment.app.Fragment;
 import com.example.doctor_patient_app.R;
 import com.example.doctor_patient_app.helpers.Validators;
 import com.example.doctor_patient_app.interfaces.IActivityFragmentCommunication;
+import com.example.doctor_patient_app.models.dbEntities.Doctor;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -113,9 +114,10 @@ public class DoctorLoginFragment extends Fragment {
                         task -> {
                            if (task.isSuccessful()){
                                FirebaseUser user = mAuth.getCurrentUser();
+                               Doctor loggedDoctor = new Doctor("null",email,0,null);
                                Toast.makeText(getContext(),"Succesful login!",Toast.LENGTH_SHORT).show();
                                if (iActivityFragmentCommunication != null){
-
+                                    iActivityFragmentCommunication.loadMainDoctorFragment(loggedDoctor);
                                }
                            }else{
                                Toast.makeText(getContext(),"Login failed!",Toast.LENGTH_SHORT).show();

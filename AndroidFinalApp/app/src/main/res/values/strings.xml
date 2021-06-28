@@ -13,4 +13,6 @@
     <string name="register">Register</string>
     <string name="tablets">Tablets</string>
     <string name="doctor_advices">Doctor Advices</string>
+    <string name="update">Update</string>
+    <string name="load_patients">Load Patients</string>
 </resources>
