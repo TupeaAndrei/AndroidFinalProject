@@ -86,7 +86,11 @@ public class DoctorFragment extends Fragment {
 
         updateButton = view.findViewById(R.id.doctor_main_update);
         updateButton.setOnClickListener(v -> {
-
+            if (iActivityFragmentCommunication != null){
+                Doctor doctor = new Doctor(doctorNameString,doctorEmailString,0,null);
+                doctor.setId(doctor_Id);
+                iActivityFragmentCommunication.loadUpdateDoctorFragment(doctor);
+            }
         });
         Button loadPatientsButton = view.findViewById(R.id.doctor_load_button);
         loadPatientsButton.setOnClickListener(v -> {

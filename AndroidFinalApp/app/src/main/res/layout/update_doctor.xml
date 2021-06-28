@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/transparent_blue">
+
+    <TextView
+        android:id="@+id/doctor_update_username_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:padding="@dimen/big_padding"
+        tools:text="NUME"
+        android:textSize="@dimen/default_email_dimension"
+        android:textStyle="bold|italic"
+        />
+
+    <TextView
+        android:id="@+id/update_doctor_age_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/doctor_update_username_text"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="@dimen/default_email_dimension"
+        android:text="@string/age"
+        android:textStyle="bold"
+        android:padding="@dimen/small_padding_dimen"
+        />
+
+    <EditText
+        android:id="@+id/update_doctor_edit_age"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/doctor_update_username_text"
+        app:layout_constraintStart_toEndOf="@id/update_doctor_age_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="@dimen/default_email_dimension"
+        android:padding="@dimen/small_padding_dimen"
+        android:hint="@string/enter_age"
+        />
+
+    <TextView
+        android:id="@+id/update_doctor_spec_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/update_doctor_age_text"
+        app:layout_constraintStart_toStartOf="parent"
+        android:padding="@dimen/small_padding_dimen"
+        android:textSize="@dimen/default_email_dimension"
+        android:textStyle="bold"
+        android:text="@string/specialization"
+        />
+
+    <EditText
+        android:id="@+id/update_doctor_spec_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/update_doctor_edit_age"
+        app:layout_constraintStart_toEndOf="@id/update_doctor_spec_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="@dimen/default_email_dimension"
+        android:padding="@dimen/small_padding_dimen"
+        android:hint="@string/enter_specialization"
+        />
+
+    <Button
+        android:id="@+id/update_doctor_done_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/update_doctor_spec_text"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="@string/done"
+        android:backgroundTint="@color/faded_green"
+        android:textColor="@color/black"
+        android:textSize="@dimen/default_email_dimension"
+        />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

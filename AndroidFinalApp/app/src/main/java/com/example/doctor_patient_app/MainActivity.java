@@ -18,6 +18,7 @@ import com.example.doctor_patient_app.fragments.PatientInitialFragment;
 import com.example.doctor_patient_app.fragments.PatientLoginFragment;
 import com.example.doctor_patient_app.fragments.PatientRegisterFragment;
 import com.example.doctor_patient_app.fragments.TabletsFragment;
+import com.example.doctor_patient_app.fragments.UpdateDoctorFragment;
 import com.example.doctor_patient_app.fragments.WelcomeFragment;
 import com.example.doctor_patient_app.interfaces.IActivityFragmentCommunication;
 import com.example.doctor_patient_app.interfaces.IAdapterDatabaseCommunication;
@@ -142,6 +143,20 @@ public class MainActivity extends AppCompatActivity implements IActivityFragment
         args.putInt("patient_id",patientId);
         doctorAdvicesFragment.setArguments(args);
         transaction.replace(R.id.frame_layout_id,doctorAdvicesFragment,"DoctorAdvicesFragment")
+                .addToBackStack(null).commit();
+    }
+
+    @Override
+    public void loadUpdateDoctorFragment(Doctor doctor) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        UpdateDoctorFragment updateDoctorFragment = new UpdateDoctorFragment();
+        Bundle args = new Bundle();
+        args.putInt("doctor_id",doctor.getId());
+        args.putString("doctor_name",doctor.getName());
+        args.putString("doctor_email",doctor.getEmail());
+        updateDoctorFragment.setArguments(args);
+        transaction.replace(R.id.frame_layout_id,updateDoctorFragment,"UpdateDoctorFragment")
                 .addToBackStack(null).commit();
     }
 

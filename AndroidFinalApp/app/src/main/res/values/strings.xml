@@ -15,4 +15,8 @@
     <string name="doctor_advices">Doctor Advices</string>
     <string name="update">Update</string>
     <string name="load_patients">Load Patients</string>
+    <string name="enter_age">Enter age...</string>
+    <string name="specialization">Specialization:</string>
+    <string name="enter_specialization">Enter specialization...</string>
+    <string name="done">Done</string>
 </resources>

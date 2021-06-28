@@ -12,4 +12,13 @@ public class Validators {
     public static boolean isValidPassword(String password){
         return !TextUtils.isEmpty(password) && password.length() >= 6;
     }
+
+    public static boolean isNumeric(String num){
+        try{
+            Integer.parseInt(num);
+            return true;
+        }catch (NumberFormatException e){
+            return false;
+        }
+    }
 }

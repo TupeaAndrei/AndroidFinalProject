@@ -17,6 +17,7 @@ import com.example.doctor_patient_app.data.tasks.insertTasks.InsertAdvicesTask;
 import com.example.doctor_patient_app.data.tasks.insertTasks.InsertDoctorTask;
 import com.example.doctor_patient_app.data.tasks.insertTasks.InsertPatientTask;
 import com.example.doctor_patient_app.data.tasks.insertTasks.InsertTabletTask;
+import com.example.doctor_patient_app.data.tasks.updateTasks.UpdateDoctorTask;
 import com.example.doctor_patient_app.data.tasks.updateTasks.UpdatePatientTask;
 import com.example.doctor_patient_app.models.dbEntities.Doctor;
 import com.example.doctor_patient_app.models.dbEntities.DoctorAdvices;
@@ -106,6 +107,10 @@ public class HealthCareRepository {
 
     public void getDoctorWithEmail(String email,OnGetDoctorWithEmailListener listener){
         new GetDoctorWithEmailTask(healthCareDataBase,listener).execute(email);
+    }
+
+    public void updateDoctor(Doctor doctor,HealthCareRepositoryListener listener){
+        new UpdateDoctorTask(healthCareDataBase,listener).execute(doctor);
     }
 
     public void getAllPatients(OnGetPatientListener listener){
