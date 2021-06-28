@@ -113,6 +113,14 @@ public class PatientFragment extends Fragment implements IFragmentActivityCommun
                 iActivityFragmentCommunication.loadDoctorAdvicesFragment(patient_id);
             }
         });
+        Button updateButton = view.findViewById(R.id.update_patient_button);
+        updateButton.setOnClickListener(v -> {
+            if (iActivityFragmentCommunication != null){
+                Patient patient = new Patient(patientNameString,patientEmailString,null,0,0,0,doctorId);
+                patient.setId(patient_id);
+                iActivityFragmentCommunication.loadUpdatePatientFragment(patient);
+            }
+        });
         completePatient();
 
     }

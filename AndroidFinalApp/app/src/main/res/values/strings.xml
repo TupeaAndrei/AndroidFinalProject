@@ -19,4 +19,6 @@
     <string name="specialization">Specialization:</string>
     <string name="enter_specialization">Enter specialization...</string>
     <string name="done">Done</string>
+    <string name="enter_height">Enter height...</string>
+    <string name="enter_weight">Enter weight..</string>
 </resources>

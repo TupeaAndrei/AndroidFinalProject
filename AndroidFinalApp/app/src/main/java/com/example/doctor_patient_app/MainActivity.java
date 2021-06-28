@@ -19,7 +19,9 @@ import com.example.doctor_patient_app.fragments.PatientLoginFragment;
 import com.example.doctor_patient_app.fragments.PatientRegisterFragment;
 import com.example.doctor_patient_app.fragments.TabletsFragment;
 import com.example.doctor_patient_app.fragments.UpdateDoctorFragment;
+import com.example.doctor_patient_app.fragments.UpdatePatientFragment;
 import com.example.doctor_patient_app.fragments.WelcomeFragment;
+import com.example.doctor_patient_app.helpers.BundleMaker;
 import com.example.doctor_patient_app.interfaces.IActivityFragmentCommunication;
 import com.example.doctor_patient_app.interfaces.IAdapterDatabaseCommunication;
 import com.example.doctor_patient_app.interfaces.IFragmentActivityCommunication;
@@ -103,7 +105,7 @@ public class MainActivity extends AppCompatActivity implements IActivityFragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         PatientFragment patientFragment = new PatientFragment();
-        Bundle args = setPatientBundle(patient.getName(),patient.getEmail(),patient.getAge().toString(),
+        Bundle args = BundleMaker.setPatientBundle(patient.getName(),patient.getEmail(),patient.getAge().toString(),
                 patient.getHeight().toString(),patient.getWeight().toString(),patient.getDiagnostic());
         patientFragment.setArguments(args);
         transaction.replace(R.id.frame_layout_id,patientFragment,"PatientFragment").addToBackStack(null).commit();
@@ -115,7 +117,7 @@ public class MainActivity extends AppCompatActivity implements IActivityFragment
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction transaction = fragmentManager.beginTransaction();
         DoctorFragment doctorFragment = new DoctorFragment();
-        Bundle args = setDoctorBundle(doctor.getName(),doctor.getEmail(),doctor.getAge().toString(),
+        Bundle args = BundleMaker.setDoctorBundle(doctor.getName(),doctor.getEmail(),doctor.getAge().toString(),
                 doctor.getSpecialization());
         doctorFragment.setArguments(args);
         transaction.replace(R.id.frame_layout_id,doctorFragment,"DoctorFragment")
@@ -160,45 +162,18 @@ public class MainActivity extends AppCompatActivity implements IActivityFragment
                 .addToBackStack(null).commit();
     }
 
-    private Bundle setPatientBundle(String name,String email,String age,
-                                    String height,String weight,String diagnostic)
-    {
-        Bundle args = new Bundle();
-        if (age.equals("0")){
-            age = notSpecifiedError;
-        }
-        if (height.equals("0")){
-            height = notSpecifiedError;
-        }
-        if (weight.equals("0")){
-            weight = notSpecifiedError;
-        }
-        if (diagnostic == null){
-            diagnostic = notSpecifiedError;
-        }
-        args.putString("patient_name",name);
-        args.putString("patient_email",email);
-        args.putString("patient_age",age);
-        args.putString("patient_height",height);
-        args.putString("patient_weight",weight);
-        args.putString("patient_diagnostic",diagnostic);
-        return args;
+    @Override
+    public void loadUpdatePatientFragment(Patient patient) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        UpdatePatientFragment updatePatientFragment = new UpdatePatientFragment();
+        Bundle args = BundleMaker.setBundleForUpdatePatient(patient.getId(),patient.getName(),
+                patient.getEmail(),patient.getDoctorId());
+        updatePatientFragment.setArguments(args);
+        transaction.replace(R.id.frame_layout_id,updatePatientFragment,"UpdatePatientFragment")
+                .addToBackStack(null).commit();
     }
 
-    private Bundle setDoctorBundle(String username,String email,String age,String specialization){
-        Bundle args = new Bundle();
-        if (age.equals("0")){
-            age = notSpecifiedError;
-        }
-        if (specialization == null){
-            specialization = notSpecifiedError;
-        }
-        args.putString("doctor_name",username);
-        args.putString("doctor_email",email);
-        args.putString("doctor_age",age);
-        args.putString("doctor_specialization",specialization);
-        return args;
-    }
 
     @Override
     public void updateThisPatient(Integer id) {
