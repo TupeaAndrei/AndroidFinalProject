@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
@@ -52,6 +53,12 @@ public class WelcomeFragment extends Fragment {
         patientIcon.setOnClickListener(v -> {
             if (iActivityFragmentCommunication != null){
                 iActivityFragmentCommunication.loadInitialPatientFragment();
+            }
+        });
+        Button creditsButton = view.findViewById(R.id.credits_button);
+        creditsButton.setOnClickListener(v -> {
+            if (iActivityFragmentCommunication != null){
+                iActivityFragmentCommunication.loadCreditsFragment();
             }
         });
     }

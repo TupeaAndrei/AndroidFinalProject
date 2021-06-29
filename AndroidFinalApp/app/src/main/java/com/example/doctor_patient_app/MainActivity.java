@@ -8,6 +8,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.os.Bundle;
 import android.util.Log;
 
+import com.example.doctor_patient_app.fragments.CreditsFragment;
 import com.example.doctor_patient_app.fragments.DoctorAdvicesFragment;
 import com.example.doctor_patient_app.fragments.DoctorFragment;
 import com.example.doctor_patient_app.fragments.DoctorHelperFragment;
@@ -186,6 +187,15 @@ public class MainActivity extends AppCompatActivity implements IActivityFragment
         doctorHelperFragment.setArguments(args);
         transaction.replace(R.id.frame_layout_id,doctorHelperFragment,"DoctorHelperFragment").
                 addToBackStack(null).commit();
+    }
+
+    @Override
+    public void loadCreditsFragment() {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        CreditsFragment creditsFragment = new CreditsFragment();
+        transaction.replace(R.id.frame_layout_id,creditsFragment,"CreditsFragment")
+                .addToBackStack(null).commit();
     }
 
 

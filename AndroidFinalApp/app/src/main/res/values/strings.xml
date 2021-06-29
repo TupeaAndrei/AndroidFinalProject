@@ -30,4 +30,6 @@
     <string name="name">Name:</string>
     <string name="enter_indications">Enter indications...</string>
     <string name="enter_description">Enter description...</string>
+    <string name="credits">Credits</string>
+    <string name="parse">Parse</string>
 </resources>
